@@ -8,6 +8,6 @@ sock = dgram.createSocket("udp4", function (msg, rinfo) {
 });
 
 sock.on('listening', function() {
-	log('Bound to 192.168.1.55:514');
+	log('Bound to localhost:514');
 });
-sock.bind(514, '192.168.1.55');
+sock.bind(514, '0.0.0.0');
