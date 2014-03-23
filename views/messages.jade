@@ -10,9 +10,11 @@ block content
       tr: th Messages
     tbody
       tr
-        th SourceIP
-          th Data
+        th TimeStamp
+          th SourceIP
+            th Data
       each message, i in messages
         tr
-          td= message.sourceip
-            td= message.data
+          td= message.timestamp
+            td= message.sourceip
+              td= message.data

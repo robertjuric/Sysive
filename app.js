@@ -13,11 +13,12 @@ var Buffer = require('buffer').Buffer;
 var dgram = require('dgram');
 var log = require('util').log;
 var app = express();
-
+var moment = require('moment');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/Sysive');
 var collection = db.get('messagecollection');
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -47,7 +48,9 @@ http.createServer(app).listen(app.get('port'), function(){
 sock = dgram.createSocket("udp4", function (msg, rinfo) {
 	//log('got message from '+ rinfo.address +':'+rinfo.port);
 	//log('data len: '+ rinfo.size + " data: "+ msg.toString('ascii', 0, rinfo.size));
+    
 	collection.insert({
+        "timestamp" : moment().format('YYYYMMDD:HHmm:ss:SS'),
 		"sourceip" : rinfo.address,
 		"data" : msg.toString('ascii', 0, rinfo.size)
 	}, function (err, doc) {
