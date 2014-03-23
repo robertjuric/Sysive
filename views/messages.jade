@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+    h1.
+        Message List
+  table
+    thead
+      tr: th Messages
+    tbody
+      tr
+        th SourceIP
+          th Data
+      each message, i in messages
+        tr
+          td= message.sourceip
+            td= message.data
