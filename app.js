@@ -5,7 +5,6 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var messages = require('./routes/messages');
 var http = require('http');
 var path = require('path');
@@ -37,33 +36,31 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Routes
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/messages', messages.list(db));
-
+//Start Express Server
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  log('Express server listening on port ' + app.get('port'));
 });
-
+//Create socket with callback for message event listener
 sock = dgram.createSocket("udp4", function (msg, rinfo) {
-	//log('got message from '+ rinfo.address +':'+rinfo.port);
-	//log('data len: '+ rinfo.size + " data: "+ msg.toString('ascii', 0, rinfo.size));
-    
 	collection.insert({
         "timestamp" : moment().format('YYYYMMDD:HHmm:ss:SS'),
 		"sourceip" : rinfo.address,
 		"data" : msg.toString('ascii', 0, rinfo.size)
 	}, function (err, doc) {
 		if (err) {
-			console.log('Error writing');
+			log('Error writing');
 		}
 		else {
-			console.log('Successful log');
+			log('Successful log');
 		}
 	});
 });
 
-sock.on('listening', function() {
-	log('Bound to localhost:514');
-});
 sock.bind(514, '0.0.0.0');
+sock.on('listening', function() {
+	log('Syslog server listening on localhost:514');
+});
+
