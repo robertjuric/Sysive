@@ -17,25 +17,29 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/Sysive');
 var collection = db.get('messagecollection');
+// Express Middleware
+var morgan = require('morgan');
 
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.use(express.favicon());
-app.use(express.logger('dev'));
+
+// Middleware
+app.use(morgan('combined'));
 app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
+//app.use(express.urlencoded());
+//app.use(express.methodOverride());
+//app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
+*/
 
 // Routes
 app.get('/', routes.index);

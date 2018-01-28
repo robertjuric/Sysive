@@ -1,15 +1,27 @@
 {
-  "name": "Sysive",
+  "name": "sysive",
   "version": "0.0.2",
-  "private": true,
+  "description": "Syslog Archive",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertjuric/Sysive.git"
+  },
+  "author": "Robert Juric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertjuric/Sysive/issues"
+  },
+  "homepage": "https://github.com/robertjuric/Sysive#readme",
   "dependencies": {
-    "express": "3.4.8",
+    "express": "^4.16.2",
     "moment": "^2.20.1",
-    "mongodb": "*",
+    "mongodb": "^3.0.1",
     "monk": "^6.0.5",
+    "morgan": "^1.9.0",
     "pug": "^2.0.0-rc.4"
   }
 }
