@@ -1,15 +1,15 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "Sysive",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "3.4.8",
-    "jade": "*",
     "moment": "^2.20.1",
     "mongodb": "*",
-    "monk": "^6.0.5"
+    "monk": "^6.0.5",
+    "pug": "^2.0.0-rc.4"
   }
 }
