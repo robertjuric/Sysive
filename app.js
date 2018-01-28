@@ -1,7 +1,7 @@
 
-/**
- * Module dependencies.
- */
+//
+// Module dependencies.
+//
 
 var express = require('express');
 var routes = require('./routes');
@@ -36,14 +36,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 // Routes
 app.get('/', routes.index);
 app.get('/messages', messages.list(db));
+
+
 //Start Express Server
 http.createServer(app).listen(app.get('port'), function(){
   log('Express server listening on port ' + app.get('port'));
 });
-//Create socket with callback for message event listener
+
+///Create socket with callback for message event listener
 sock = dgram.createSocket("udp4", function (msg, rinfo) {
 	collection.insert({
         "timestamp" : moment().format('YYYYMMDD:HHmm:ss:SS'),
